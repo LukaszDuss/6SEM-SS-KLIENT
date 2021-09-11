@@ -1,132 +1,78 @@
 <template>
-  <nav
-    class="
-      relative
-      flex flex-wrap
-      items-center
-      justify-between
-      px-2
-      py-3
-      bg-pink-500
-      mb-3
-      shadow-b-lg
-    "
-  >
+  <div class="z-30 relative w-full">
     <div
-      class="container px-4 mx-auto flex flex-wrap items-center justify-between"
+      class="flex w-full p-4 justify-between bg-green-500 text-white shadow-lg"
     >
-      <div
-        class="
-          w-full
-          relative
-          flex
-          justify-between
-          lg:w-auto
-          px-4
-          lg:static
-          lg:block
-          lg:justify-start
-        "
-      >
-        <a
-          class="
-            text-sm
-            font-bold
-            leading-relaxed
-            inline-block
-            mr-4
-            py-2
-            whitespace-nowrap
-            uppercase
-            text-white
-          "
-          href="/"
-        >
-          KANBAN
+      <div class="flex">
+        <a href="/" class="flex flex-row items-center">
+          <svg
+            version="1.1"
+            id="Warstwa_1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 500 500"
+            class="h-10 w-8 fill-current"
+          >
+            <path
+              d="M.1 494.1c-1.1 9.5 6.3 17.8 15.9 17.8l32.3.1c8.1 0 14.9-5.9 16-13.9.7-4.9 1.8-11.1 3.4-18.1H380c1.6 6.9 2.9 13.2 3.5 18.1 1.1 8 7.9 14 16 13.9l32.3-.1c9.6 0 17.1-8.3 15.9-17.8-4.6-37.9-25.6-129-118.9-207.7-17.6 12.4-37.1 24.2-58.5 35.4 6.2 4.6 11.4 9.4 17 14.2H159.7c21.3-18.1 47-35.6 78.7-51.4C410.5 199.1 442.1 65.8 447.9 17.9 449 8.4 441.6.1 432 .1L399.6 0c-8.1 0-14.9 5.9-16 13.9-.7 4.9-1.8 11.1-3.4 18.1H67.8c-1.6-7-2.7-13.1-3.4-18.1-1.1-8-7.9-14-16-13.9L16.1.1C6.5.1-1 8.4.1 17.9 5.3 60.8 31.4 171.8 160 256 31.5 340.2 5.3 451.2.1 494.1zM224 219.6c-25.1-13.7-46.4-28.4-64.3-43.6h128.5c-17.8 15.2-39.1 30-64.2 43.6zM355.1 96c-5.8 10.4-12.8 21.1-21 32H114c-8.3-10.9-15.3-21.6-21-32h262.1zM92.9 416c5.8-10.4 12.8-21.1 21-32h219.4c8.3 10.9 15.4 21.6 21.2 32H92.9z"
+            ></path>
+          </svg>
+
+          <span class="flex items-center text-lg">
+            <span class="font-thin">KAN</span>
+            <span class="font-semibold">BAN</span>
+          </span>
         </a>
-        <button
-          class="
-            text-white
-            cursor-pointer
-            text-xl
-            leading-none
-            px-3
-            py-1
-            border border-solid border-transparent
-            rounded
-            bg-transparent
-            block
-            lg:hidden
-            outline-none
-            focus:outline-none
-          "
-          type="button"
-          v-on:click="toggleNavbar()"
-        >
-          <span class="ml-2">MENU</span>
-        </button>
       </div>
-      <div
-        v-bind:class="{ hidden: !showMenu, flex: showMenu }"
-        class="lg:flex lg:flex-grow items-center"
-      >
-        <ul class="flex flex-col lg:flex-row list-none ml-auto">
-          <li class="nav-item">
-            <a
-              class="
-                px-3
-                py-2
-                flex
-                items-center
-                text-xs
-                uppercase
-                font-bold
-                leading-snug
-                text-white
-                hover:opacity-75
-              "
-              href="/login"
-            >
-              <span class="ml-2">LOGIN</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="
-                px-3
-                py-2
-                flex
-                items-center
-                text-xs
-                uppercase
-                font-bold
-                leading-snug
-                text-white
-                hover:opacity-75
-              "
-              href="/register"
-            >
-              <span class="ml-2">REGISTER</span>
-            </a>
-          </li>
-        </ul>
+      <div class="flex">
+        <a
+          v-if="menu == 'list'"
+          href="/create"
+          class="flex items-center p-2 focus:outline-none"
+          @submit.prevent
+        >
+          ADD
+          <Zondicon
+            icon="add-solid"
+            class="flex w-6 h-6 fill-current text-white ml-2"
+          />
+        </a>
+
+        <a
+          v-else
+          href="/tasks"
+          class="flex items-center focus:outline-none"
+          @submit.prevent
+        >
+          BACK
+          <Zondicon
+            icon="arrow-outline-left"
+            class="flex w-6 h-6 fill-current text-white mx-2"
+          />
+        </a>
+        <a
+          href="/"
+          class="flex items-center py-2 focus:outline-none"
+          @submit.prevent
+        >
+          LOGOUT
+          <Zondicon
+            icon="arrow-outline-right"
+            class="flex w-6 h-6 fill-current text-white ml-2"
+          />
+        </a>
       </div>
     </div>
-  </nav>
+  </div>
 </template>
-
 <script>
+import Zondicon from 'vue-zondicons'
 export default {
-  name: 'pink-navbar',
   data() {
-    return {
-      showMenu: false,
-    }
+    return {}
   },
-  methods: {
-    toggleNavbar: function () {
-      this.showMenu = !this.showMenu
-    },
+  props: ['menu'],
+  components: {
+    Zondicon,
   },
 }
 </script>

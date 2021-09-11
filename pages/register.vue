@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="h-screen bg-gray-100">
     <Navi />
     <RegisterForm />
   </div>

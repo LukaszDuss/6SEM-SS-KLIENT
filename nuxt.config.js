@@ -42,12 +42,31 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
+
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: 'http://localhost:3000/'
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+  // auth: {
+  //   strategies: {
+  //     local: {
+  //       token: {
+  //         required: true,
+  //         type: 'bearer'
+  //       },
+  //       endpoints: {
+  //         login: { url: '/sessions', method: 'post', propertyName: 'token' },
+  //         logout: { url: '/auth/login', method: 'post' },
+  //         user: { url: '/auth/login', method: 'post' },
+  //       }
+  //     }
+  //   }
+  // }
 }

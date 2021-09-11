@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-full bg-gray-100">
+  <div class="flex flex-col w-full h-screen bg-gray-100">
     <Navi />
     <Intro class="w-full flex" />
     <TransitionOdd />
