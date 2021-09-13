@@ -1,10 +1,10 @@
 <template>
-  <div class=" w-full justify-center items-center">
+  <div class="w-full justify-center items-center">
     <div v-if="errored" class="">
       <Error />
     </div>
-    <div v-else class="w-full justify-center mt-52 ">
-      <div class=" justify-center items-center w-full  px-8">
+    <div v-else class="w-full justify-center mt-52">
+      <div class="justify-center items-center w-full px-8">
         <form
           class="
             bg-white
@@ -18,11 +18,11 @@
           "
           @submit.prevent
         >
-          <div class="w-full justify-center font-bold text-gray-600 ">
+          <div class="w-full justify-center font-bold text-gray-600">
             Create new task
           </div>
 
-          <div class="identity-input my-4 ">
+          <div class="identity-input my-4">
             <input
               class="
                 shadow
@@ -40,12 +40,12 @@
               placeholder="Task name..."
               v-model="task"
             />
-            <span v-if="success" class="text-xs text-green-500 w-full  mb-3  "
+            <span v-if="success" class="text-xs text-green-500 w-full mb-3"
               >Task added!</span
             >
           </div>
 
-          <div class=" items-center justify-center">
+          <div class="items-center justify-center">
             <button
               class="
                 bg-green-600
@@ -95,8 +95,9 @@ export default {
             console.log(error)
             this.errored = true
           })
-          .finally((response) => {
+          .then(() => {
             this.success = true
+            this.$router.push('/tasks')
           })
       }
     },

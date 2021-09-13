@@ -12,6 +12,7 @@
           mb-4
           border-t-4 border-green-400
         "
+        @submit.prevent
       >
         <div class="w-full flex justify-center font-bold text-gray-600">
           Log in to your account
@@ -39,6 +40,7 @@
               focus:outline-none
               focus:shadow-outline
             "
+            required
             type="text"
             placeholder="Email"
             aria-describedby="emailHelp"
@@ -70,16 +72,17 @@
               focus:outline-none
               focus:shadow-outline
             "
+            required
             id="password"
             type="password"
             placeholder="*******"
           />
 
-          <span class="text-xs text-red-700" id="passwordHelp"></span>
+          <span v-if="badCreds" class="text-xs text-red-700" id="passwordHelp">Wrong user or password</span>
         </div>
 
         <div class="flex items-center justify-between">
-          <a
+          <button
             href="/tasks"
             class="
               bg-green-600
@@ -92,10 +95,11 @@
               focus:outline-none
               focus:shadow-outline
             "
+            @click="loginUser()"
             type="submit"
           >
             Log In
-          </a>
+          </button>
           <a
             class="
               inline-block
@@ -115,10 +119,12 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'LoginForm',
   data() {
     return {
+      badCreds: false,
       userInfo: {
         email: '',
         password: '',
@@ -126,10 +132,29 @@ export default {
     }
   },
   methods: {
-    loginUser() {
-      this.$auth.loginWith('local', {
-        data: this.userInfo,
-      })
+    async loginUser() {
+      axios
+        .post('http://localhost:3002/user/login', {
+          data: {
+            name: this.userInfo.email,
+            pass: this.userInfo.password,
+          },
+        })
+        .catch((error) => {
+          console.log(error)
+          this.errored = true
+        })
+        .then((response) => {
+          console.log(response)
+
+          if ((response.status != 201)) {
+            this.badCreds =true
+          } else {
+            localStorage.token = response.data
+            this.$router.push('/tasks')
+            console.log(localStorage.token)
+          }
+        })
     },
   },
 }

@@ -49,17 +49,18 @@
             class="flex w-6 h-6 fill-current text-white mx-2"
           />
         </a>
-        <a
+        <button
           href="/"
           class="flex items-center py-2 focus:outline-none"
           @submit.prevent
+          @click="logout()"
         >
           LOGOUT
           <Zondicon
             icon="arrow-outline-right"
             class="flex w-6 h-6 fill-current text-white ml-2"
           />
-        </a>
+        </button>
       </div>
     </div>
   </div>
@@ -70,6 +71,13 @@ export default {
   data() {
     return {}
   },
+  methods: {
+    logout() {
+      localStorage.token = ''
+      this.$router.push('/')
+    },
+  },
+
   props: ['menu'],
   components: {
     Zondicon,

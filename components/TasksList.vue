@@ -1,10 +1,11 @@
 <template>
-  <div class=" bg-gray-100 p-4">
-    <div v-if="errored" class="">
-      <Error />
-    </div>
+  <div class="p-4">
+    <!-- ERROR MSG -->
+    <div v-if="errored" class=""><Error /></div>
 
+    <!-- TASK LIST -->
     <div v-else class="w-full">
+      <!-- LOADING MSG -->
       <div class="h-screen" v-if="loading"><Loading /></div>
       <div v-else>
         <ul>
@@ -117,19 +118,28 @@ export default {
     }
   },
   async mounted() {
-    axios
-      .get('http://localhost:3002/tasks')
-      .then((response) => {
-        this.tasks = response.data
-        this.tempTasks = response.data
-      })
-      .catch((error) => {
-        console.log(error)
-        this.errored = true
-      })
-      .finally(() => {
-        this.loading = false
-      })
+    if(localStorage.token){
+
+      axios
+        .get('http://localhost:3002/tasks', {
+          headers: {
+            'sessionToken': localStorage.token,
+          },
+        })
+        .then((response) => {
+          this.tasks = response.data
+          this.tempTasks = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => {
+          this.loading = false
+        })
+    } else {
+      this.errored = true
+    }
   },
   methods: {
     async deleteTask(index, id) {
@@ -139,15 +149,15 @@ export default {
             id: id,
           },
         })
-        .then((response) => {
-          this.$delete(this.tasks, index)
-        })
         .catch((error) => {
           console.log(error)
           this.errored = true
         })
-      // .finally(() => (this.loading = false))
+        .then((response) => {
+          this.$delete(this.tasks, index)
+        })
     },
+
     async updateStatus(index, task) {
       let id = task.id
       let status = !task.status
@@ -162,12 +172,12 @@ export default {
           console.log(error)
           this.errored = true
         })
-        .finally(() => (this.tasks[index].status = !task.status))
+        .then(() => (this.tasks[index].status = !task.status))
     },
+
     async updateTask(index, task) {
       let id = task.id
       let newTask = task.task
-      console.log(id)
       axios
         .put('http://localhost:3002/tasks', {
           data: {
@@ -179,7 +189,7 @@ export default {
           console.log(error)
           this.errored = true
         })
-        .finally(() => (this.tempTasks[index].edit = false))
+        .then(() => (this.tempTasks[index].edit = false))
     },
 
     editTask: function (index) {

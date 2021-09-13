@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full bg-gray-100">
+  <div class="w-full min-h-screen bg-gray-100">
      <Toolbar menu="list"/>
      <TasksList />
   </div>

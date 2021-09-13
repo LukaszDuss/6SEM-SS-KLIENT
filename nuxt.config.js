@@ -2,32 +2,28 @@ export default {
   server: {
     port: 8000, // default: 3000
     host: '0.0.0.0', // default: localhost,
-    timing: false
+    timing: false,
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'klient',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
+  css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-  ],
+  plugins: [],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -43,30 +39,13 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://localhost:3000/'
+    baseURL: 'http://localhost:3000/',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  },
-  // auth: {
-  //   strategies: {
-  //     local: {
-  //       token: {
-  //         required: true,
-  //         type: 'bearer'
-  //       },
-  //       endpoints: {
-  //         login: { url: '/sessions', method: 'post', propertyName: 'token' },
-  //         logout: { url: '/auth/login', method: 'post' },
-  //         user: { url: '/auth/login', method: 'post' },
-  //       }
-  //     }
-  //   }
-  // }
+  build: {},
 }
