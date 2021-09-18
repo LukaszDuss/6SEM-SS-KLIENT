@@ -78,7 +78,9 @@
             placeholder="*******"
           />
 
-          <span v-if="badCreds" class="text-xs text-red-700" id="passwordHelp">Wrong user or password</span>
+          <span v-if="badCreds" class="text-xs text-red-700" id="passwordHelp"
+            >Wrong user or password</span
+          >
         </div>
 
         <div class="flex items-center justify-between">
@@ -145,14 +147,11 @@ export default {
           this.errored = true
         })
         .then((response) => {
-          console.log(response)
-
-          if ((response.status != 201)) {
-            this.badCreds =true
+          if (response.status != 201) {
+            this.badCreds = true
           } else {
             localStorage.token = response.data
             this.$router.push('/tasks')
-            console.log(localStorage.token)
           }
         })
     },

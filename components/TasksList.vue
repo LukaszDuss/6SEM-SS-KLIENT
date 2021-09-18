@@ -56,9 +56,9 @@
                 v-if="task.edit"
                 type="text"
                 v-model="task.task"
-                class="px-2 flex font-bold w-3/5"
+                class="px-2 flex font-bold w-full"
               />
-              <div v-else class="px-2 flex font-bold w-3/5">
+              <div v-else class="px-2 flex font-bold w-full">
                 {{ task.task }}
               </div>
               <div class="flex flex-row">
